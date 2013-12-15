@@ -2,9 +2,9 @@ class Hand
   attr_accessor :cards
 
   def self.cardSort(x, y)
-    suite_order = 'SHDC'
+    suit_order = 'SHDC'
     if x.val == y.val then
-      suite_order.index(x.suite_letter) <=> suite_order.index(y.suite_letter)
+      suit_order.index(x.suit_letter) <=> suit_order.index(y.suit_letter)
     else
       y.val <=> x.val
     end
