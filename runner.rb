@@ -28,6 +28,10 @@ class TestHankRanker < Test::Unit::TestCase
     dj = card("JD")
     assert_equal(11, dj.val)
     assert_equal(:diamonds, dj.suite)
+
+    da = card("AD")
+    assert_equal(14, da.val)
+    assert_equal(:diamonds, da.suite)
   end
 
   def test_Hand_init_also_sorts
@@ -39,19 +43,38 @@ class TestHankRanker < Test::Unit::TestCase
     assert_equal(card("3C"), h.cards[4])
   end
 
+  def setup
+    @highc = Hand.new("2D 3C KS 4D 9H")
+    @twokind = Hand.new("2D 2C KS 4D 9H")
+    @twopair = Hand.new("2D 2C KS KD 9H")
+    @threekind = Hand.new("2D 2C 2S KD 9H")
+    @straight = Hand.new("6D 3C 4S 5D 2H")
+    @straight_a_low = Hand.new("2D 3C 4S 5D AH")
+  end
+
   def test_Hand_type
-    h = Hand.new("2D 3C KS 4D 9H")
-    assert_equal(:highcard, h.type)
-    assert_equal(card("KS"), h.cards[0])
+    setup()
+    assert_equal(:highcard, @highc.type)
+    assert_equal(:twokind, @twokind.type)
+    assert_equal(:twopair, @twopair.type)
+    assert_equal(:threekind, @threekind.type)
+    assert_equal(:straight, @straight.type)
+    assert_equal(:straight, @straight_a_low.type)
 
-    h = Hand.new("2D 2C KS 4D 9H")
-    assert_equal(:twokind, h.type)
+    # doesn't accept 10 as valid input
+    # h = Hand.new("10D JC QS KD AH")
+    # assert_equal(:straight, h.type)
+  end
 
-    h = Hand.new("2D 2C KS KD 9H")
-    assert_equal(:twopair, h.type)
-
-    h = Hand.new("2D 2C 2S KD 9H")
-    assert_equal(:threekind, h.type)
+  def test_HankRanker
+    setup()
+    rankedHands = Hand.rank([@twopair, @highc, @straight_a_low, @threekind, @twokind, @straight])
+    assert_equal(@straight_a_low, rankedHands[0])
+    assert_equal(@straight, rankedHands[1])
+    assert_equal(@threekind, rankedHands[2])
+    assert_equal(@twopair, rankedHands[3])
+    assert_equal(@twokind, rankedHands[4])
+    assert_equal(@highc, rankedHands[5])
   end
  
 end

@@ -5,6 +5,8 @@ class Card
     @val = str[0, 1].to_i
     if @val == 0 then
       case str[0,1]
+      when "A"
+        @val = 14
       when "K"
         @val = 13
       when "Q"
