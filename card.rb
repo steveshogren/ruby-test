@@ -1,5 +1,5 @@
 class Card
-  attr_accessor :val, :suite, :suite_letter
+  attr_accessor :val, :suit, :suit_letter
 
   def initialize(str)
     @val = str[0, 1].to_i
@@ -15,8 +15,8 @@ class Card
         @val = 11
       end 
     end
-    @suite_letter  = str[1, 1]
-    case @suite_letter
+    @suit_letter  = str[1, 1]
+    case @suit_letter
       when "H"
       s = :hearts
       when "S"
@@ -26,10 +26,10 @@ class Card
       when "C"
       s = :clubs
     end 
-    @suite = s
+    @suit = s
   end
 
   def ==(other)
-    other.val == @val && other.suite == @suite
+    other.val == @val && other.suit == @suit
   end
 end

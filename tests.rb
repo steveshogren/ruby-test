@@ -15,23 +15,23 @@ class TestHands < Test::Unit::TestCase
   def test_Card_new
     h3 = card("3H")
     assert_equal(3, h3.val)
-    assert_equal(:hearts, h3.suite)
+    assert_equal(:hearts, h3.suit)
 
     sk = card("KS")
     assert_equal(13, sk.val)
-    assert_equal(:spades, sk.suite)
+    assert_equal(:spades, sk.suit)
 
     cq = card("QC")
     assert_equal(12, cq.val)
-    assert_equal(:clubs, cq.suite)
+    assert_equal(:clubs, cq.suit)
 
     dj = card("JD")
     assert_equal(11, dj.val)
-    assert_equal(:diamonds, dj.suite)
+    assert_equal(:diamonds, dj.suit)
 
     da = card("AD")
     assert_equal(14, da.val)
-    assert_equal(:diamonds, da.suite)
+    assert_equal(:diamonds, da.suit)
   end
 
   def test_Hand_init_also_sorts
