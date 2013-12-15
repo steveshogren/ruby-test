@@ -43,7 +43,7 @@ class TestHankRanker < Test::Unit::TestCase
     assert_equal(card("3C"), h.cards[4])
   end
 
-  def setup
+  def handSetup
     @highc = Hand.new("2D 3C KS 4D 9H")
     @twokind = Hand.new("2D 2C KS 4D 9H")
     @twopair = Hand.new("2D 2C KS KD 9H")
@@ -53,7 +53,7 @@ class TestHankRanker < Test::Unit::TestCase
   end
 
   def test_Hand_type
-    setup()
+    handSetup()
     assert_equal(:highcard, @highc.type)
     assert_equal(:twokind, @twokind.type)
     assert_equal(:twopair, @twopair.type)
@@ -62,12 +62,16 @@ class TestHankRanker < Test::Unit::TestCase
     assert_equal(:straight, @straight_a_low.type)
 
     # doesn't accept 10 as valid input
-    # h = Hand.new("10D JC QS KD AH")
-    # assert_equal(:straight, h.type)
+    h = Hand.new("10D JC QS KD AH")
+    assert_equal(:straight, h.type)
+    assert_equal(10, h.cards[4].val)
+
+    fail("Add in flush test here")
+    fail("Add in four of a kind test here")
   end
 
   def test_HankRanker
-    setup()
+    handSetup()
     rankedHands = Hand.rank([@twopair, @highc, @straight_a_low, @threekind, @twokind, @straight])
     assert_equal(@straight_a_low, rankedHands[0])
     assert_equal(@straight, rankedHands[1])
