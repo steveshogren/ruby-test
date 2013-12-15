@@ -3,13 +3,13 @@ require_relative "card"
 require "test/unit"
 
 class TestHankRanker < Test::Unit::TestCase
-  def testHandsEquality
-    assert_equal(card("3H"), card("3H"))
-    assert_equal(card("2D"), card("2D"))
-  end
-
   def card(s)
     Card.new(s)
+  end
+
+  def test_Hand_equality
+    assert_equal(card("3H"), card("3H"))
+    assert_equal(card("2D"), card("2D"))
   end
 
   def test_Card_new
