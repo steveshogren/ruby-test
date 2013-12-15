@@ -2,7 +2,7 @@ require_relative "hand"
 require_relative "card"
 require "test/unit"
 
-class TestHankRanker < Test::Unit::TestCase
+class TestHands < Test::Unit::TestCase
   def card(s)
     Card.new(s)
   end
@@ -42,7 +42,9 @@ class TestHankRanker < Test::Unit::TestCase
     assert_equal(card("KC"), h.cards[3])
     assert_equal(card("3C"), h.cards[4])
   end
+end
 
+class TestHandRanker < Test::Unit::TestCase
   def handSetup
     @highc = Hand.new("2D 3C KS 4D 9H")
     @twokind = Hand.new("2D 2C KS 4D 9H")
@@ -61,13 +63,13 @@ class TestHankRanker < Test::Unit::TestCase
     assert_equal(:straight, @straight.type)
     assert_equal(:straight, @straight_a_low.type)
 
-    # doesn't accept 10 as valid input
+    # TODO: doesn't accept 10 as valid input
     h = Hand.new("10D JC QS KD AH")
     assert_equal(:straight, h.type)
     assert_equal(10, h.cards[4].val)
 
-    fail("Add in flush test here")
-    fail("Add in four of a kind test here")
+    fail("Add in flush tests")
+    fail("Add in four of a kind tests")
   end
 
   def test_HankRanker
