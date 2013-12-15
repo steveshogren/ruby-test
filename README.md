@@ -1,6 +1,8 @@
 To run:
 
+```
 ruby tests.rb
+```
 
 To do:
 * Make the tests pass (fix the missing 10 card bug)
